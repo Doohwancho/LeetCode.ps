@@ -1,6 +1,6 @@
 package LeetCode03;
 
-public class ToLowerCase {
+public class ToLowerCase {                     
 	
 	    public String toLowerCase(String str) {
 	        StringBuilder s = new StringBuilder();
@@ -10,8 +10,7 @@ public class ToLowerCase {
 	                c+=('a'-'A');
 	            
 	            s.append(c);
-	        }
+	        }       
 	         return s.toString();
 	    }
-	
 }
