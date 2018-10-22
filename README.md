@@ -1,0 +1,19 @@
+# LeetCode
+
+package LeetCode03;
+
+public class ToLowerCase {
+	
+	    public String toLowerCase(String str) {
+	        StringBuilder s = new StringBuilder();
+	        for(char c:str.toCharArray())
+	        {
+	            if(c>='A' && c<='Z')
+	                c+=('a'-'A');
+	            
+	            s.append(c);  
+	        }
+	         return s.toString();
+	    }
+	
+}
