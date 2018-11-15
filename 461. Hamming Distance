@@ -3,7 +3,7 @@
 Given two integers x and y, calculate the Hamming distance.
 
 Note:
-0 ¡Â x, y < 231.
+0 Â¡Ã‚ x, y < 231.
 
 Example:
 
@@ -14,7 +14,7 @@ Output: 2
 Explanation:
 1   (0 0 0 1)
 4   (0 1 0 0)
-       ¡è   ¡è
+       Â¡Ã¨   Â¡Ã¨
  * 
  * The above arrows point to positions where the corresponding bits are different.
  */
@@ -30,7 +30,7 @@ public class Hamming {
         char[] charsY = Integer.toBinaryString(y).toCharArray();
         int num = 0;
         int c = 0;
-        for (char c ; charsX.length ; c++) { //?¿Ö array.length°¡ ¾ÈµÅ´Â°ÅÁö?
+        for (char c ; charsX.length ; c++) { 
             if (charsX[c] != charsY[c]) {
                 num++;
             }
