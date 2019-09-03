@@ -142,6 +142,57 @@ public class OccurenceAfterBigram1078 {
 	}
 	*/
 	
+	//<문제풀이 02.5>
+	
+	//else if문이 매 loop마다 반복되는게 비효율적이라 앞으로 뺐다.
+	
+	//근데 그래도 걸리는 시간은 2ms.변하지 않았다.
+	
+	//Runtime: 2 ms, faster than 21.46% of Java online submissions for Occurrences After Bigram.
+	//Memory Usage: 34.8 MB, less than 100.00% of Java online submissions for Occurrences After Bigram.
+	
+	public static String[] findOcurrences(String text, String first, String second) {
+		List<Integer> indexList = new ArrayList<>();
+		
+		for(int i = 0; i < text.length(); i++)
+		{
+			if(text.charAt(i) == ' ')
+			{
+				indexList.add(i);
+			}
+		}
+		indexList.add(text.length());
+		
+		String firstWord = text.substring(0, indexList.get(0));
+		String secondWord = text.substring(indexList.get(0)+1, indexList.get(1));
+		String rst = "";
+        int startIndex = indexList.get(1)+1;
+		
+		for(int j = 2; j < indexList.size(); j++)
+		{
+            int endIndex = indexList.get(j);
+            String currWord = text.substring(startIndex, endIndex);
+			if(j > 1 && firstWord.equals(first) && secondWord.equals(second))
+			{
+				rst = rst + " " + currWord;
+				firstWord = secondWord;
+				secondWord = currWord;
+			}
+			else
+			{
+				firstWord = secondWord;
+				secondWord = currWord;
+			}
+			startIndex = endIndex+1;
+		}
+		
+		return (rst.length() > 0) ? rst.substring(1).split("\\s") : new String[0];
+    }
+	
+	
+	
+	/*
+	
 	//<문제풀이 by rock>
 	
 	//그냥 text를 .split으로 단어별로 쪼개고
@@ -166,6 +217,8 @@ public class OccurenceAfterBigram1078 {
 		}
 		return rst.toArray(new String[0]);
 	}
+	
+	*/
 	
 	public static void main(String[] args) {
 		String text = "alice is a good girl she is a good student";
