@@ -112,27 +112,29 @@ public class OccurenceAfterBigram1078 {
 		
 		for(int j = 0; j < indexList.size(); j++)
 		{
+            int endIndex = indexList.get(j);
+            String currWord = text.substring(startIndex, endIndex);
 			if(j > 1 && firstWord.equals(first) && secondWord.equals(second))
 			{
-				rst = rst + " " + text.substring(startIndex, indexList.get(j));
+				rst = rst + " " + currWord;
 				firstWord = secondWord;
-				secondWord = text.substring(startIndex, indexList.get(j));
+				secondWord = currWord;
 			}
 			else if(j == 1)
 			{
-				secondWord = text.substring(startIndex, indexList.get(j));
+				secondWord = currWord;
 			}
 			else if(j == 0)
 			{
-				firstWord = text.substring(startIndex, indexList.get(j));
+				firstWord = currWord;
 			}
 			else
 			{
 				firstWord = secondWord;
-				secondWord = text.substring(startIndex, indexList.get(j));
+				secondWord = currWord;
 			}
 				
-			startIndex = indexList.get(j)+1;
+			startIndex = endIndex+1;
 		}
 		
 		
