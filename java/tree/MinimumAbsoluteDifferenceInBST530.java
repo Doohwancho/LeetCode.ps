@@ -14,6 +14,7 @@ public class MinimumAbsoluteDifferenceInBST530 {
 		}
 	}
 	
+	/*
 	//<문제풀이1>
 	
 	//bst tree를 in-order-traversal로 돌면서 리스트에 값을 담으면, 오름차순으로 자동적으로 이쁘게 담아짐.
@@ -45,4 +46,54 @@ public class MinimumAbsoluteDifferenceInBST530 {
 		}
 		return rst;
 	}
+	*/
+	
+	/*
+	//<Trial01>
+	
+	//in-order-traversal로 한칸씩 돌면서 노드간 차이를 담으려고 했으나,
+	
+	//right child로 갔을 때, 이전 부모노드의 값을 받아오지 못해 실패.
+
+    int rst = Integer.MAX_VALUE;
+    
+    private int inOrder(TreeNode root) {
+        if(root == null) return 0;
+        int left = inOrder(root.left);
+        if(left > 0) rst = Math.min(rst, root.val - left);
+        inOrder(root.right);    
+        return root.val;
+    }
+    public int getMinimumDifference(TreeNode root) {
+        if(root == null) return 0;
+        inOrder(root);
+        return rst;
+    }
+    */
+
+	
+	//<문제풀이2 by compson_scatter>
+	
+	//Trial01에서 right child로 갔을 때, 이전노드의 값을 받아오지 못하는 문제점을 해결.
+	
+	//깔-끔
+	
+	//Runtime: 0 ms, faster than 100.00% of Java online submissions for Minimum Absolute Difference in BST.
+	//Memory Usage: 38.7 MB, less than 100.00% of Java online submissions for Minimum Absolute Difference in BST.
+    
+	int rst = Integer.MAX_VALUE;
+    TreeNode prev;
+    
+    private void inOrder(TreeNode root) {
+        if(root == null) return;
+        inOrder(root.left);
+        if(prev != null) rst = Math.min(rst, root.val - prev.val);
+        prev = root;
+        inOrder(root.right);    
+    }
+    public int getMinimumDifference(TreeNode root) {
+        if(root == null) return 0;
+        inOrder(root);
+        return rst;
+    }
 }
