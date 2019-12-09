@@ -100,7 +100,7 @@ public class SubtreeOfAnotherTree572 {
     
 	private boolean compare(TreeNode s, TreeNode t){
         if(s == null && t == null) return true;
-        if((s == null && t != null) || (s != null && t == null) || s.val != t.val) return false;
+        if(s == null || t == null || s.val != t.val) return false;
         return compare(s.left, t.left) && compare(s.right, t.right);
     }
     
