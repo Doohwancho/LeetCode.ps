@@ -1,10 +1,10 @@
 package TwoPointers;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
+
+
 
 public class PalindromeLinkedList234 {
-	public class ListNode {
+	static class ListNode {
 		int val;
 		ListNode next;
 
@@ -64,32 +64,6 @@ public class PalindromeLinkedList234 {
 	
 	//reverse부분 모르겠다. 머리 터질듯.
 	
-	//Runtime: 1 ms, faster than 99.49% of Java online submissions for Palindrome Linked List.
-	//Memory Usage: 41 MB, less than 65.85% of Java online submissions for Palindrome Linked List.
-	
-	
-    public boolean isPalindrome(ListNode head) {
-        ListNode fast = head, slow = head;
-        while (fast != null && fast.next != null) {
-            fast = fast.next.next;
-            slow = slow.next;
-        }
-        if (fast != null) { // odd nodes: let right half smaller
-            slow = slow.next;
-        }
-        slow = reverse(slow);
-        fast = head;
-        
-        while (slow != null) {
-            if (fast.val != slow.val) {
-                return false;
-            }
-            fast = fast.next;
-            slow = slow.next;
-        }
-        return true;
-    }
-  
     
     //[-16557,-8725,-29125,28873,-21702,15483,-28441,-17845,-4317,-10914,
     // -10914,-4317,-17845,-28441,15483,-21702,28873,-29125,-8725,-16557]
@@ -112,15 +86,75 @@ public class PalindromeLinkedList234 {
 //    after reverse1   -16557
 //    after reverse2   -8725
 //    after reverse3  -29125
+	
+	//Runtime: 1 ms, faster than 99.49% of Java online submissions for Palindrome Linked List.
+	//Memory Usage: 41 MB, less than 65.85% of Java online submissions for Palindrome Linked List.
+	
+	
+    public static boolean isPalindrome(ListNode head) {
+        ListNode fast = head, slow = head;
+        while (fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+        if (fast != null) { // odd nodes: let right half smaller
+            slow = slow.next;
+        }
+        System.out.println("before reverse->  slow.val: "+ slow.val+"  slow.next.val: "+slow.next.val);
+        slow = reverse(slow);
+        System.out.println("After reverse->   slow.val:  "+ slow.val+"  slow.next.val:  "+slow.next.val);
+        fast = head;
+        
+        while (slow != null) {
+            if (fast.val != slow.val) {
+                return false;
+            }
+            fast = fast.next;
+            slow = slow.next;
+        }
+        return true;
+    }
     
-    public ListNode reverse(ListNode head) {
+    public static ListNode reverse(ListNode head) {
         ListNode prev = null;
         while (head != null) {
             ListNode next = head.next; 
             head.next = prev; 
             prev = head; 
-            head = next;  
+            head = next;
+            if(prev != null) System.out.print(" prev: "+prev.val); 
+            if(head != null) {
+            	System.out.print(" head: "+head.val);
+            	
+            	if(head.next != null) {
+            		System.out.print(" head.next: "+head.next.val);
+            	}
+            }
+            if(next != null) System.out.print(" next: "+next.val);
+            System.out.println();
         }
+        
         return prev; 
     }
+    
+    public static void main(String[] args) {
+    	ListNode head1 = new ListNode(1);
+    	ListNode head2 = new ListNode(2);
+    	ListNode head3 = new ListNode(3);
+    	ListNode head4 = new ListNode(4);
+    	ListNode head5 = new ListNode(5);
+    	ListNode head6 = new ListNode(6);
+//    	ListNode head7 = new ListNode(7);
+    	
+    	head1.next = head2;
+    	head2.next = head3;
+    	head3.next = head4;
+    	head4.next = head5;
+    	head5.next = head6;
+//    	head6.next = head7;
+    	
+		
+    	isPalindrome(head1);
+	}
 }
+
