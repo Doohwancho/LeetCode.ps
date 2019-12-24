@@ -2,7 +2,7 @@ package Array;
 
 public class FindWinnerOnTicTacToe1275 {
 	
-	
+	/*
 	//<Trial01>
 	
 	//Input : [[0,0],[1,1],[2,0],[1,0],[1,2],[2,1],[0,1],[0,2],[2,2]]
@@ -59,4 +59,33 @@ public class FindWinnerOnTicTacToe1275 {
 	        }
 	        return turn == 9 ? "Draw" : "Pending";
 	    }
+	*/
+	
+	//<문제풀이1 by kylewzk>
+	
+	//똑똑허이
+	
+	//Runtime: 0 ms, faster than 100.00% of Java online submissions for Find Winner on a Tic Tac Toe Game.
+	//Memory Usage: 34.4 MB, less than 100.00% of Java online submissions for Find Winner on a Tic Tac Toe Game.
+	
+    public String tictactoe(int[][] m) {
+        if(check(m, 0)) return "A";
+        if(check(m, 1)) return "B";
+        if(m.length == 9) return "Draw";
+        return "Pending";
+    }
+    
+    boolean check(int[][] m, int s) {
+        int[] r = new int[3], c = new int[3];
+        int d1 = 0, d2 = 0;
+        
+        while(s < m.length) {
+            if(++r[m[s][0]] == 3) return true; //가로로 3번 등장하면 빙고
+            if(++c[m[s][1]] == 3) return true; //세로로 3번 등장하면 빙고
+            if(m[s][0] == m[s][1] && ++d1 == 3) return true; //좌상 우하 직선 빙고 
+            if(m[s][0] + m[s][1] == 2 && ++d2 == 3) return true; //우상 좌하 직선 빙고
+            s += 2; //A는 A만, B는 B만 봐야 되기 때문에 하나씩 건너 뜀.
+        }
+        return false;
+    }
 }
