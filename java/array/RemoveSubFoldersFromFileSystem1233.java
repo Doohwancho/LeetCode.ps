@@ -150,7 +150,7 @@ public class RemoveSubFoldersFromFileSystem1233 {
 	}
 	*/
 	
-	//<문제풀이1>
+	//<문제풀이1 by sschangi>
 	
 	//	Your input : ["/a","/a/b","/c/d","/c/d/e","/c/f"]
 	
@@ -171,7 +171,6 @@ public class RemoveSubFoldersFromFileSystem1233 {
 	//	[/a, /c/f, /c/d]	
 
 	//	Output :  ["/a","/c/d","/c/f"]
-	
 	
 	//Runtime: 46 ms, faster than 67.98% of Java online submissions for Remove Sub-Folders from the Filesystem.
 	//Memory Usage: 55.1 MB, less than 100.00% of Java online submissions for Remove Sub-Folders from the Filesystem.
