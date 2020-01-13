@@ -68,6 +68,8 @@ public class ArrayNesting565 {
         return rst;
     }
 	*/
+	
+	/*
 	//<문제풀이2 by alexander>
 	
 	//문제풀이1과 이거랑 차이점은, 위는 +1밖에 안해서 while()문에서 한번이라도 도는데, 밑에꺼는 아예 -1로 해놔서, 이미 지나간곳은 안돔.
@@ -92,5 +94,32 @@ public class ArrayNesting565 {
         }
         return maxsize;
     }
+	*/
 	
+	//<문제풀이3 by johnson9432>
+	
+	//문제풀이1의 문제점(다녀간데 표시) 해결 + 문제점2(리스트 크기를 nums크기로 하면 되는데 20000으로 박아버린 것)
+	
+	//+문제풀이2의 문제점(원본 리스트 nums의 값 훼손)을 해결한 가장 좋은 답안.
+	
+	//문제풀이1의 new int[20000]을 new int[nums.length]로 바꿨는데 2ms뜸. 
+	
+	//Runtime: 1 ms, faster than 100.00% of Java online submissions for Array Nesting.
+	//Memory Usage: 48.3 MB, less than 16.67% of Java online submissions for Array Nesting.
+	
+    public int arrayNesting(int[] nums) {
+        int maxLen = 0;
+        boolean[] visited = new boolean[nums.length];
+        for(int n : nums){
+            int currLen = 0;
+            while(!visited[n]){
+                currLen++;
+                visited[n] = true;
+                n = nums[n];
+            }
+            maxLen = Math.max(maxLen, currLen);
+        }
+        return maxLen;
+    }
+
 }
