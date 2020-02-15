@@ -99,6 +99,7 @@ public class FindTheDuplicateNumber287 {
     }
     */
     
+	/*
     //<문제풀이2 by pratik_patil>
     
     //Floyd's Cycle Detection Algorithm
@@ -145,6 +146,42 @@ public class FindTheDuplicateNumber287 {
         //4 -> 2 -> 4 -> 2
         
         return s;
+    }
+    */
+	
+	//<문제풀이3 by pratik_patil>
+	
+	//The idea is when visiting a number i, flip the number at index i - 1 to negative. 
+	//If the number at index i - 1 is already negative, then i is the number that occurs more than once.
+	
+	//Time complexity: O(n)
+	//Space complexity: O(1)
+	
+	//근데 조건 1. You must not modify the array (assume the array is read only)에 해당하지 않네.
+	
+	//Runtime: 0 ms, faster than 100.00% of Java online submissions for Find the Duplicate Number.
+	//Memory Usage: 42.9 MB, less than 5.09% of Java online submissions for Find the Duplicate Number.
+	
+	public int findDuplicate(int[] A)
+    {
+		//[1,3,4,2,2]
+		
+		//i = 0, index = 0, A[0] = 0, [0,3,4,2,2]
+		//i = 1, index = 2, A[2] = -4, [0, 3, -4, 2, 2]
+		//i = 2, index = 2, A[2] < 0, return 2
+		//i = 3,
+		//i = 4,
+		
+        for(int i = 0; i < A.length; i++) 
+		{
+			int index = Math.abs(A[i]) - 1;
+
+			if(A[index] < 0)
+				return index + 1;
+            else
+			    A[index] = -A[index];
+		}
+        return -1;
     }
 
 }
