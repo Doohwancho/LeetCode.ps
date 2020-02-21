@@ -43,7 +43,7 @@ public class SpiralMatrixII59 {
 	
 	//dfs
 	
-	//특이점은 right부분의 조건절 (i < n || (coord[0] > 0 && rst[coord[0]-1][coord[1]] != 0))
+	//특이점은 오른쪽으로 가는 부분의 조건절 (i < n || (coord[0] > 0 && rst[coord[0]-1][coord[1]] != 0))
 	
 	//자꾸 11에서 12넘어갈때 막히길래
 	
@@ -64,40 +64,22 @@ public class SpiralMatrixII59 {
 	//Memory Usage: 37.3 MB, less than 8.33% of Java online submissions for Spiral Matrix II.
 	
 	public int[][] generateMatrix(int n) {
-        int[][] rst = new int[n][n];
+		int[][] rst = new int[n][n];
         int[] coord = new int[2];
-        int[] dir = new int[4]; //right,down,left,up
-        
+
         for(int i = 1; i < n*n+1; i++){
             rst[coord[0]][coord[1]] = i; 
             
             if((i < n || (coord[0] > 0 && rst[coord[0]-1][coord[1]] != 0)) && coord[1] < n-1 && rst[coord[0]][coord[1]+1] == 0){
-                dir[3] = 0;
-                dir[0] = 1;
-            }
-            else if(coord[0] < n-1 && rst[coord[0]+1][coord[1]] == 0){
-                dir[0] = 0;
-                dir[1] = 1;
-            }
-            else if(coord[1] > 0 && rst[coord[0]][coord[1]-1] == 0){
-                dir[1] = 0;
-                dir[2] = 1;
-            }
-            else if(coord[0] > 0 && rst[coord[0]-1][coord[1]] == 0){
-                dir[2] = 0;
-                dir[3] = 1;
-            }
-            
-            if(dir[0] == 1){
                 coord[1]++;
             }
-            else if(dir[1] == 1){
+            else if(coord[0] < n-1 && rst[coord[0]+1][coord[1]] == 0){
                 coord[0]++;
             }
-            else if(dir[2] == 1){
+            else if(coord[1] > 0 && rst[coord[0]][coord[1]-1] == 0){
                 coord[1]--;
             }
-            else if(dir[3] == 1){
+            else if(coord[0] > 0 && rst[coord[0]-1][coord[1]] == 0){
                 coord[0]--;
             }
         }
