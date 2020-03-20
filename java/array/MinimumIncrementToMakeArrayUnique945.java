@@ -145,10 +145,6 @@ public class MinimumIncrementToMakeArrayUnique945 {
                     container[anchor]--; 
                     if(container[anchor] == 1) anchor = -1;  
                 }
-                else{
-                    i++; 
-                    continue; 
-                }
             }
             i++;
         }
