@@ -31,7 +31,7 @@ public class FindLuckyIntegerInArr1394 {
         for(int i = arr.length-1; i >= 0; i--){
             int n = arr[i];
             if(i-n+1 >= 0 && n == arr[i-n+1]){
-                if(i-n < 0 || (i-n>=0 && n != arr[i-n])){
+                if(i-n < 0 || n != arr[i-n]){
                     return arr[i];
                 }
             }
