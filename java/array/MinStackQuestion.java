@@ -87,6 +87,7 @@ public class MinStackQuestion {
 	}
 	*/
 
+	/*
 	//<문제풀이3>
 	
 	//이거지!!!!!!
@@ -150,6 +151,58 @@ public class MinStackQuestion {
 	    
 	    public int getMin() {
 	        return tr.firstKey();
+	    }
+	}
+	*/
+	
+	//<문제풀이4 by ivtoskov>
+	
+	//이것이 바로 인터뷰어가 원하는 정석적인 stack 디자인
+
+	//18 / 18 test cases passed.
+	//Status: Accepted
+	//Runtime: 4 ms
+	//Memory Usage: 41.5 MB
+	
+	class MinStack {
+
+	    class Node{
+	        int val;
+	        int min;
+	        Node next;
+	        
+	        Node(int val, int min){
+	            this.val = val;
+	            this.min = min;
+	            this.next = null;
+	        }
+	        
+	        Node(int val, int min, Node node){ //새 노드 추가할땐 기존노드를 새노드.next로 붙여
+	            this.val = val;
+	            this.min = min;
+	            this.next = node;
+	        }
+	    }
+	    private Node head;
+
+	    public void push(int x) {
+	        if(head == null){
+	            head = new Node(x, x);
+	        } else {
+	            head = new Node(x, Math.min(head.min, x), head); //넣을때마다 min tracking하는거 지렸다
+	        }
+	    }
+
+	    public void pop() {
+	        head = head.next; //리턴값이 없어서 망정이지
+	    }
+
+	    public int top() {
+	        return head.val;
+	    }
+
+	    public int getMin() {
+	        return head.min;
 	    }
 	}
 }
