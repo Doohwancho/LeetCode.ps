@@ -44,7 +44,6 @@ public class SubarraySumEqualsToK {
             //인데, 3을 카운트 해줘야 하면, 왼쪽에 있는거 하나도 누적합 3, 오른쪽에 있는 3도 누적합 3이니까, 같은걸로 치잖아
             //그러니까 이전에 같은 수 나왔으면 +1해줘야지
         }
-        return rst; 
-        
+        return rst;
     }
 }
