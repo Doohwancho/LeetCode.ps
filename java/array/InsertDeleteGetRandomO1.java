@@ -108,7 +108,7 @@ public class InsertDeleteGetRandomO1 {
 	            return false;
 	        }
 	        
-	        map.put(val, list.size());
+	        map.put(val, list.size()); //list.size()를 벨류로 넣는 이유는, list의 인덱스를 나타내주기 위함.
 	        list.add(val);
 	        return true;
 	    }
@@ -117,12 +117,30 @@ public class InsertDeleteGetRandomO1 {
 	        if(!map.containsKey(val)) {
 	            return false;
 	        }
+            //map = {{A:0},{B:1},{C:2}}
+            //list = {A,B,C}
+            //val = B
+            //라고 했을때, remove(B)를 했다고 치자.
 	        
-	        int idx = map.remove(val); //map.remove(key) returns the value previously associated with the key
-	        int last = list.remove(list.size() - 1);
-	        if(val != last) { //가장 마지막에 들어온게 val이면, if문 건너뛰고 return true, 그게 아니면, 
-	            list.set(idx, last); //리스트에 뺀거 다시 넣고
-	            map.put(last, idx); //val이 있던 자리에 list에 맨 마지막에 있던(list.remove()로 뺐던) last를 박아넣음
+	        int idx = map.remove(val); //map.remove(key) returns the value previously associated with the key. 그니까 B는 val의 리스트의 인덱스인 1이 되겠지?
+	        int last = list.remove(list.size() - 1); //일단 list에 마지막애인 C를 빼봐.
+            
+            //중간점검
+            //map = {{A:0},{C:2}}
+            //list = {A,B}
+            //val = B
+            //idx = 1
+            //last = C
+            
+	        if(val != last) { //val이 last랑 같다면,(== val이 list에 가장 마지막에 있는 애랑 같다면), C이미 뺐잖아? 그럼 그냥 return true하고 끝내면 되지?
+	            list.set(idx, last); //근데 val(B)이 리스트에서 맨 마지막 애인 last(C)가 아니면, 리스트에 뺀 last(C)를 B의 자리에 엎어쓰기(list = {A,C,C})
+	            map.put(last, idx); //map에 last를 박는데, value를 idx로 넣어. map = {{A:0},{C:1}}
+                
+                //결과물을 보자.
+                //map = {{A:0},{C:1}}
+                //list = {A,C,C}
+                
+                //리스트에 C가 중복되긴 하지만 다른 함수가 동작할때 영향을 주지 않아서 상관없어.
 	        }
 	        return true;
 	    }
