@@ -193,13 +193,19 @@ public class ReconstructItinerary {
     
     //Hierholzer’s Algorithm
     
-    //일단 알파벳 순차적으로 key:value넣을때 정렬해 놓고,
+    //https://m.youtube.com/watch?v=qZrfK2iE4UA 
     
-    //알파벳 순서대로 일단 끝까지 간 다음에, 막힐때마다 route에 넣고
+    //보면 얼추 설명해줌. 
     
-    //맨 마지막에 뒤집으면 된다네. 아 시바 왜 막힐때마다 route에 박고 마지막에 역순으로 뽑는지 이해가 안돼네
+    //일단 돌다가 막히는 부분이 나왔는데, 모든 노드를 다 돌지 않았으면,
     
-    //Eulerian path 유튜브에 검색하면 될듯.
+    //막히기 전으로 돌아가서 다른 길로 돌아. 다시 막힐때까지.
+    
+    //다시 가다가 또 막혔는데 모든 노드를 다 안돌았으면, 위에방식 반복.
+    
+    //모든 노드를 돌고 막힐때까지.
+    
+    //모든 노드를 돌고 막혔으니까, starting point만 알면 모든 노드를 쭉 이어지게 돌 수 있지.
     
     //Eulerian path. Greedy DFS, building the route backwards when retreating.
     
