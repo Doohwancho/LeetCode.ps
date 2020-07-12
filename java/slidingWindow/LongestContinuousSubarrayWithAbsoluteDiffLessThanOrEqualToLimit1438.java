@@ -8,7 +8,7 @@ public class LongestContinuousSubarrayWithAbsoluteDiffLessThanOrEqualToLimit1438
 	
 	//sliding window
 	
-	//±âÃÊ »À´ë ÀÎµ¥ ÃÖ´ñ°ª ÃÖ¼Ú°ª °³³ä¸¸ ÀÌ½ÄÇÏ¸é µÉ°Å°°Àºµ¥
+	//ê¸°ì´ˆ ë¼ˆëŒ€ ì¸ë° ìµœëŒ“ê°’ ìµœì†Ÿê°’ ê°œë…ë§Œ ì´ì‹í•˜ë©´ ë ê±°ê°™ì€ë°
 	
     public int longestSubarray(int[] nums, int limit) {
         int rst = 0;
@@ -27,11 +27,11 @@ public class LongestContinuousSubarrayWithAbsoluteDiffLessThanOrEqualToLimit1438
     }
     
     
-    //<¹®Á¦Ç®ÀÌ1>
+    //<ë¬¸ì œí’€ì´1>
     
-    //³ª, ÃµÀç, °­¸² 
+    //ë‚˜, ì²œì¬, ê°•ë¦¼ 
     
-    //time: O(n)
+    //time: O(n^2)
     //space: O(n)
     
     //Runtime: 36 ms, faster than 59.64% of Java online submissions for Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit.
@@ -40,23 +40,23 @@ public class LongestContinuousSubarrayWithAbsoluteDiffLessThanOrEqualToLimit1438
     public int longestSubarray(int[] nums, int limit) {
         int rst = 0;
         
-        for(int i = 0, j = 0, maxi = nums[0], mini = nums[0]; j < nums.length; j++){ //j´Â ¸Ç ¿À¸¥ÂÊ¾Ö, i´Â ¸Ç ¿ŞÂÊ¾Ö
-            maxi = Math.max(maxi, nums[j]); //j°¡ ¾îµğ±îÁö °¬³Ä°¡ Áß¿äÇÑ°Ô ¾Æ´Ï¶ó, i~jÁß¿¡ Á© Å«¾Ö¶û Á© ÀÛÀº¾Ö°¡ ´©±¸³Ä°¡ Áß¿ä. ±×°É maxi,mini¿¡ °è¼Ó ¾÷µ¥ÀÌÆ®
+        for(int i = 0, j = 0, maxi = nums[0], mini = nums[0]; j < nums.length; j++){ //jëŠ” ë§¨ ì˜¤ë¥¸ìª½ì• , iëŠ” ë§¨ ì™¼ìª½ì• 
+            maxi = Math.max(maxi, nums[j]); //jê°€ ì–´ë””ê¹Œì§€ ê°”ëƒê°€ ì¤‘ìš”í•œê²Œ ì•„ë‹ˆë¼, i~jì¤‘ì— ì ¤ í°ì• ë‘ ì ¤ ì‘ì€ì• ê°€ ëˆ„êµ¬ëƒê°€ ì¤‘ìš”. ê·¸ê±¸ maxi,miniì— ê³„ì† ì—…ë°ì´íŠ¸
             mini = Math.min(mini, nums[j]);
             
-            if(maxi-mini > limit){ //¸¸¾à limitÀ» ¹ş¾î³µÀ¸¸é
-                maxi = Integer.MIN_VALUE; //maxi,mini¸¦ ÃÊ±âÈ­ ÇØÁÖ°í
+            if(maxi-mini > limit){ //ë§Œì•½ limitì„ ë²—ì–´ë‚¬ìœ¼ë©´
+                maxi = Integer.MIN_VALUE; //maxi,minië¥¼ ì´ˆê¸°í™” í•´ì£¼ê³ 
                 mini = Integer.MAX_VALUE;
                 
-                while(++i < j && Math.abs(nums[j]-nums[i]) > limit){} //i¸¦ ¹®Á¦°¡ ¾ÈÅÍÁö´Â ÁöÁ¡±îÁö ¿À¸¥ÂÊÀ¸·Î ¶¯±è
+                while(++i < j && Math.abs(nums[j]-nums[i]) > limit){} //ië¥¼ ë¬¸ì œê°€ ì•ˆí„°ì§€ëŠ” ì§€ì ê¹Œì§€ ì˜¤ë¥¸ìª½ìœ¼ë¡œ ë•¡ê¹€
                 
                 int i_ = i;
-                while(i_ <= j){ //»õ·Î¿î i°¡ Á¤ÇØÁ³À¸´Ï, i~j±îÁöÀÇ ÃÖ´ë¼ö, ÃÖ¼Ò¼ö¸¦ ´Ù½Ã ¾÷µ¥ÀÌÆ® ½ÃÄÑÁÜ.
+                while(i_ <= j){ //ìƒˆë¡œìš´ iê°€ ì •í•´ì¡Œìœ¼ë‹ˆ, i~jê¹Œì§€ì˜ ìµœëŒ€ìˆ˜, ìµœì†Œìˆ˜ë¥¼ ë‹¤ì‹œ ì—…ë°ì´íŠ¸ ì‹œì¼œì¤Œ.
                     maxi = Math.max(maxi, nums[i_]);
                     mini = Math.min(mini, nums[i_]);
                     i_++;
                 }
-            } else { //i~j¹üÀ§¾È ÃÖ´ë°ª-ÃÖ¼Ú°ªÂ÷°¡ limit¹üÀ§ ¾È¿¡ÀÖÀ¸¸é rst¿¡ ¾÷µ¥ÀÌÆ®
+            } else { //i~jë²”ìœ„ì•ˆ ìµœëŒ€ê°’-ìµœì†Ÿê°’ì°¨ê°€ limitë²”ìœ„ ì•ˆì—ìˆìœ¼ë©´ rstì— ì—…ë°ì´íŠ¸
                 rst = Math.max(rst, j-i+1);
             }
         }
@@ -66,9 +66,9 @@ public class LongestContinuousSubarrayWithAbsoluteDiffLessThanOrEqualToLimit1438
     
     
     
-    //<¹®Á¦Ç®ÀÌ2 by prdp89>
+    //<ë¬¸ì œí’€ì´2 by prdp89>
     
-    //treemapÀ» ÀÌ¿ëÇØ¼­ ÃÖ´ñ°ª,ÃÖ¼Ú°ª ±¸ÇÏ´Â¹ı
+    //treemapì„ ì´ìš©í•´ì„œ ìµœëŒ“ê°’,ìµœì†Ÿê°’ êµ¬í•˜ëŠ”ë²•
     
     //time: O(NlogN)
     //space: O(N)
