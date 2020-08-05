@@ -172,17 +172,15 @@ public class AddAndSearchWordDataStructureDesign {
 	            return match.find();
 	            
 	        } else if(key == '.'){
+                StringBuilder tmp = new StringBuilder();
+                tmp.append("[\\s]+(");
+                for(char c : word.toCharArray()){
+                    tmp.append(c);
+                }
+                tmp.append(")[\\s]+");
+                Pattern pattern=Pattern.compile(tmp.toString());
+                
 	            for( Map.Entry<Character, StringBuilder> ele : map.entrySet() ){
-	                StringBuilder tmp = new StringBuilder();
-	            
-	                tmp.append("[\\s]+(");
-
-	                for(char c : word.toCharArray()){
-	                    tmp.append(c);
-	                }
-	                tmp.append(")[\\s]+");
-
-	                Pattern pattern=Pattern.compile(tmp.toString());
 	                Matcher match=pattern.matcher(ele.getValue());
 	                if(match.find()) return true;
 	            }
