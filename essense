@@ -5,15 +5,18 @@
 
 
 a. logical reasoning skills: deducting a -> b -> c -> d, planning & simulating ahead
-b. learn data-structure
-c. familiarize with programming language
-d. learn self-discipline (if you solve one PS a day everyday)
-e. learn different algorithms
+b. 이걸 배움으로 보지 못했던것을 볼 수 있고, 생각하지 못했던 것을 생각할 수 있게 되는 것.
+c. 공부는 버티는게 아니라 원래 재밌는 것임을 느끼기 위해.
+d. learn self-discipline. 하기 싫은걸 억지로 하는게 아닌, 스스로와 약속을 하고 그 약속을 지킴으로 인해 성숙해 지기 위해.
 
+
+e. learn data-structure
+f. learn different algorithms
+g. familiarize with programming language
 
 importance in order
 
-a >>> b > c > d >>> e
+a > b > c > d >>>>>>>>>>>> e > f > g
 
 
 
@@ -21,7 +24,44 @@ a >>> b > c > d >>> e
 
 
 ---
-2. How to learn PS effectively?
+2. What is learning?
+
+
+격-물
+fitting new idea into previously made mold(knowledge-tree)
+
+if mold doesn't exist or is a shitty one, break the old one and re-build it with new idea.
+
+
+
+**배움에 대한 오해
+
+공부는 버티는게 아니다.  배움은 원래 재밌는 것이다.
+
+PS도 재밌어서 하는 것이다. 
+
+
+
+
+
+
+---
+3. ratios
+
+
+70:20:10 = familiarize:practice:study
+
+
+**many skip familiarize part, and eventually get bored out.
+
+familiarize part is the most important part in fact.
+
+
+
+
+
+---
+4. How to learn PS effectively?
 
 
 
@@ -32,22 +72,31 @@ a >>> b > c > d >>> e
 -beginer level
 
 
-0. know why you want to learn PS.
+goal: know why you want to PS. familiarize. gain positive feelings & attitude towards PS.
 
+
+
+
+
+0. know why you want to learn PS.
+	
+	What do you desire?
+	
+	what do you get from PS?
 
 
 
 
 1. do super easy questions first, many times. 
 
-complete many easy questions to, 
+	complete many easy questions to, 
 
-A. get a mere grasp of what PS is
-B. get a positive feelings/attitude towards PS
+	A. get a mere grasp of what PS is
+	B. get a positive feelings/attitude towards PS by stacking up accomplishments(= # of solved questions)
 
-quantity >>> quality
+	quantity >>> quality
 
-it's okay to brute-force as long as it passes it.
+	it's okay to brute-force as long as it passes it.
 
 
 
@@ -55,9 +104,9 @@ it's okay to brute-force as long as it passes it.
 
 2. if you have no idea how to solve it, it's okay to look it up fast.
 
-b/c easy questions don't test you on logical reasoning. 
+	b/c easy questions don't test you on logical reasoning. 
 
-easy questions simply test you whether you know certain data structure or not.
+	easy questions simply test you whether you know certain data structure or not.
 
 
 
@@ -74,23 +123,59 @@ easy questions simply test you whether you know certain data structure or not.
 
 
 
-1. don't start coding before you finish with your logic in your head/note/blackboard from A-Z.
-** 문제를 반복해서 푸는 것, 쉬운 문제를 풀어 재끼는 것은 실력향상과 아무연관이 없음.
-knowledge-tree에 있던 개념을 어떻게 step-by-step으로 적용할 것인지 생각하는 과정이 중요.
+goal: practice:study
 
 
 
 
-2. if you can't figure it out, instead of looking whole part of solution, look at part of solution and try to build up from there on you own.
 
 
-3. even if you've figured it out, try different approaches. 
+
+0. everytime before PS, read your own essense file that tells you why you PS & how you PS.
 
 
-4. add annotations containing explaination written in your own words, and 10 year old should be able to read them and understand.
 
 
-5. everytime you learn something new, add it to your PS knowledge-tree.
+
+1. build your own knowledge-tree
+
+	everytime you solve a question, 
+	
+	a. think of which PS개념 you archived in your knowledge tree you want to use, 
+	b. how you will connect them A-B-C step by step
+
+	when you learn a new idea, emphasize with creator of this idea: why he made this in the first place?
+	
+
+
+
+
+
+2. never start coding before you finish with your logic in your head/note/blackboard from A-Z.
+	
+	** 문제를 반복해서 푸는 것, 쉬운 문제를 풀어 재끼는 것은 실력향상과 아무연관이 없음.
+	
+	knowledge-tree에 있던 개념을 어떻게 step-by-step으로 적용할 것인지 생각할때'만' 실력향상.
+
+	never set time on PS. it makes you anxious & you feel pressure to 풀어제낌 PS w/out logical reasoning
+
+
+
+
+
+3. if you can't figure it out, instead of looking whole part of solution, look at part of solution and try to build up from there on you own.
+
+
+
+
+4. even if you've figured it out, try different approaches. 
+
+
+
+
+5. explain in simple words
+
+
 
 
 6. Do at least one PS a day & leave every trace of your work on github
