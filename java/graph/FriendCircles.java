@@ -143,61 +143,45 @@ public class FriendCircles {
     
     public int findCircleNum(int[][] M) {
         int n = M.length;
-        UnionFind uf = new UnionFind(n);
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < i; j++) {
-                if (M[i][j] == 1) {
-                    uf.union(i, j);
-                } 
+        UnionCircle uc = new UnionCircle(n);
+        
+        for(int i = 0; i < n; i++){
+            for(int j = 0; j < n; j++){
+                if(M[i][j] == 1){
+                    uc.check(i, j);    
+                }
             }
         }
-        return uf.count();
+        return uc.getCnt();
     }
-    class UnionFind {
-        int[] path; 
-        int count;
-        public UnionFind(int n) {
-            path = new int[n];
-            count = n;
-            for (int i = 0; i < n; i++) {
-                path[i] = i;
+    class UnionCircle{
+        int[] connected;
+        int cnt = 0;
+        
+        UnionCircle(int n){
+            connected = new int[n];
+            cnt = n;
+            
+            for(int i = 0; i < n; i++){
+                connected[i] = i;
             }
         }
-        public int find(int i) {
-            while (i != path[i]) i = path[i];
+        
+        private int find(int i){
+            while(connected[i] != i) i = connected[i];
             return i;
         }
-        public void union(int i, int j) {
-            int rootI = find(i);
-            int rootJ = find(j);
-            if (rootI == rootJ) return;
-            path[rootI] = rootJ; 
-            count--;
+        
+        public void check(int i, int j){
+            int i_ = find(i);
+            int j_ = find(j);
+            if(i_ == j_) return;
+            connected[i_] = j_; //**connected[i] = j가 아니라 connected[i_] = j_ 인 이유는,  a->b->c  +d한 다음, c에서 d로 포인터를 옮기는 개념. 한 그룹마다 일렬로 쭉 이어진 친구들 가장 끝단에 포인터가 위치함.
+            cnt--;
         }
-        public int count() {
-            return count;
+        
+        private int getCnt(){
+            return this.cnt;
         }
     }
-	
-	
-	
-	
-	public static void main(String[] args) {
-		List<Integer> list = new ArrayList<>();
-		list.add(1);
-		list.add(2);
-		list.add(3);
-		
-		List<Integer> list2 = new ArrayList<>();
-		list2.add(1);
-		list2.add(2);
-		
-		
-//		System.out.println(list.remove(0));
-		System.out.println(list);
-		
-		list.removeAll(list2);
-		
-		System.out.println(list);
-	}
 }
