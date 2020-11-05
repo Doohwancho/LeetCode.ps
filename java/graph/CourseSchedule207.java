@@ -232,5 +232,115 @@ public class CourseSchedule207 {
         return true;
     }
     
-     
+    //<Trial07>
+    
+    //45 / 46 test cases passed.
+    
+    //아 까비 아깝소
+    
+    //boolean[][] visited -> int[]
+    
+    //0 : not visited yet
+    //1 : visiting 
+    //2 : visited
+    
+    //아 근데 처음에 돌때 1로 마크해가면서 돌잖아. 첫트엔 isCycle이 아니라고 하자.
+    
+    //근데 두번째 돌때 isCycle이라고 하자. 근데 두번째 돌땐 처음에 돈애랑 path가 겹치잖아. 그래서 봐야되는 부분을 안보고 넘어가잖아.
+    
+    //그리고 2 마크하고 넘어가서 다시는 안보는데, 그 부분이 다른 애들 돌 때 isCycle이면 어떻해?
+    
+    //visited할때 이게 bfs라서 안되는듯. dfs로 하고 visiting 1먹이고 재귀 끝나고 나올때 다시 1->0으로 바꿔주는 식으로 하면 될듯.
+    
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        boolean[][] p = new boolean[numCourses][numCourses];
+        
+        for(int[] pre : prerequisites){
+            p[pre[0]][pre[1]] = true;
+        }
+        
+        int[] visited = new int[numCourses];
+        
+        for(int i = 0; i < numCourses; i++){
+            Queue<Integer> q = new LinkedList<>();
+            q.add(i);
+            
+            while(!q.isEmpty()){
+                int parent = q.poll();
+                if(visited[parent] == 2) continue;
+                visited[parent] = 1;
+                
+                for(int j = 0; j < numCourses; j++){
+                    if(p[parent][j]){
+                        if(p[j][parent] || p[j][i]){
+                            return false;
+                        } 
+                        if(visited[j] == 0) q.add(j);
+                    }
+                }
+            }
+            visited[i] = 2;
+        }
+        return true;
+    }
+    
+    
+    //<문제풀이1>
+    
+    //dfs
+    
+    //0부터 N-1까지 directed graph에서 isCycle인지 체크하는 방법.
+    
+    //dfs+visited[]로 체크함.
+    
+    //이게 인간승리제~
+    
+    //boolean[][] -> arraylist하면 빨라질듯
+    
+    //Runtime: 53 ms, faster than 14.58% of Java online submissions for Course Schedule.
+    //Memory Usage: 42.5 MB, less than 5.10% of Java online submissions for Course Schedule.
+    
+    private boolean dfs(int i, int[] visited, boolean[][] p){
+    	//왜 한번 들렀으면 넘기는가? 
+    	//a. 0->1->0 처럼 이미 isCycle이었다면, 다른애 3->0이나 2->0이런애들이 오기 전 0이 걸렸을때 이미 걸러졌을 것.
+    	//b. 0->1->2 가 isCycle이 아니라 visited[0] = 2로 되었다면, 다른애 3->0가 와도, 0 이하애 애는 볼 필요가 없음. 이미  isCycle아니다라는게 검증되었잖어.
+    	//   그럼 0->1->2->3 이었는데 3차례가 와서 3->0이면 어떠냐고 물을수도 있는데, 그 경우라면 이미 처음에 0->1->2->3->0해서 걸러졌음.
+    	//   0 이하에 있는 애들이 아닌애가 n->0으로 왔을때, 0이하는 이미 isCycle이 아닌게 검증되었으니 볼필요없음.
+        if(visited[i] == 2){ 
+            return false; 
+        }
+        if(visited[i] == 1){
+            return true;
+        }
+        visited[i] = 1;
+        
+        for(int j = 0; j < p.length; j++){
+            if(p[i][j]){
+                if(dfs(j, visited, p)){
+                    return true;
+                };
+            }
+        }
+        visited[i] = 0;
+        
+        return false;
+    }
+    
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        boolean[][] p = new boolean[numCourses][numCourses];
+        
+        for(int[] pre : prerequisites){
+            p[pre[0]][pre[1]] = true;
+        }
+        
+        int[] visited = new int[numCourses];
+        
+        for(int i = 0; i < numCourses; i++){
+            if(dfs(i, visited, p)){
+                return false;
+            };
+            visited[i] = 2;
+        }
+        return true;
+    }
 }
