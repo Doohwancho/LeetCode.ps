@@ -94,8 +94,10 @@ public class PathWithMinimumEffort1631 {
                 if(newX < 0 || newY < 0 || newX >= m || newY >= n || visited[newX][newY]) continue; 
 
                 int diff = Math.abs(heights[newX][newY] - heights[x][y]);
-                board[newX][newY] = Math.max(board[x][y], Math.min(board[newX][newY], diff));
-                pq.offer(new int[] {newX, newY, board[newX][newY]});
+                if(diff <= board[newX][newY]){
+                    board[newX][newY] = Math.max(board[x][y], Math.min(board[newX][newY], diff));
+                    pq.offer(new int[] {newX, newY, board[newX][newY]});
+                }
             }
         }
         return 0;
