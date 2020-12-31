@@ -183,6 +183,64 @@ public class StoneGame877 {
         return dp(0, n-1,1) > 0;
     }
     
+    
+    //<문제풀이3 by lee215>
+    
+    //yet
+    
+	//5 2 0 0 
+	//0 3 0 0 
+	//0 0 4 0 
+	//0 0 0 5 
+	
+	//5 2 0 0 
+	//0 3 1 0 
+	//0 0 4 0 
+	//0 0 0 5 
+	
+	//5 2 0 0 
+	//0 3 1 0 
+	//0 0 4 1 
+	//0 0 0 5 
+	
+	//5 2 4 0 
+	//0 3 1 0 
+	//0 0 4 1 
+	//0 0 0 5 
+	
+	//5 2 4 0 
+	//0 3 1 4 
+	//0 0 4 1 
+	//0 0 0 5 
+	
+	//5 2 4 1 
+	//0 3 1 4 
+	//0 0 4 1 
+	//0 0 0 5 
+    
+    //얘도 문제풀이2 처럼 알렉스, 리 따로구하는게 아니라 차원축소해서 알렉스 최적 스코어 - 리 최적 스코어가 양수인지 판별하는 법.
+    
+//    If you pick piles[i], your result will be piles[i] - dp[i + 1][j]
+//    If you pick piles[j], your result will be piles[j] - dp[i][j - 1]
+    
+    //Runtime: 5 ms, faster than 59.14% of Java online submissions for Stone Game.
+    //Memory Usage: 39.8 MB, less than 29.70% of Java online submissions for Stone Game.
+    
+    public boolean stoneGame(int[] p) {
+        int n = p.length;
+        int[][] dp  = new int[n][n];
+        for (int i = 0; i < n; i++) dp[i][i] = p[i];
+        for (int d = 1; d < n; d++){
+            for (int i = 0; i < n - d; i++){
+                dp[i][i + d] = Math.max(p[i] - dp[i + 1][i + d], p[i + d] - dp[i][i + d - 1]);
+                draw(dp);
+            }
+        }
+        return dp[0][n - 1] > 0;
+    }
+    
+    
+    
     public static void main(String[] args) {
 		int[] pile = {1,0,100,2};
 		System.out.println(stoneGame(pile));
