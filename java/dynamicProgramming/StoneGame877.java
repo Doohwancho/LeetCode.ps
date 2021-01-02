@@ -307,10 +307,42 @@ public class StoneGame877 {
         for (int d = 1; d < n; d++){
             for (int i = 0; i < n - d; i++){
                 dp[i][i + d] = Math.max(p[i] - dp[i + 1][i + d], p[i + d] - dp[i][i + d - 1]);
-                draw(dp);
             }
         }
         return dp[0][n - 1] > 0;
+    }
+    
+    //<문제풀이4 by lee215>
+    
+    //문제풀이 3에서 dp가 2차원 배열이었는데, 2차원 배열로 차원축소한 것
+    
+	//a: 5 b: 3 c: 3 d: 5
+	//a: 3 b: 4 c: 4 d: 3
+	//a: 4 b: 5 c: 5 d: 4
+	//a: 5 b: 1 c: 4 d: 2
+	//a: 3 b: 1 c: 5 d: 1
+	//a: 5 b: 4 c: 5 d: 4
+    
+    //문제풀이3과 완벽히 동일함. 다만, 2차원 배열에서 불필요한 부분 자르고 쓰는 부분만 뽑아 1차원 배열로 압축한 것
+    
+    //Runtime: 7 ms, faster than 40.87% of Java online submissions for Stone Game.
+    //Memory Usage: 38.8 MB, less than 60.86% of Java online submissions for Stone Game.
+    
+    public boolean stoneGame(int[] p) {
+        int n = p.length;
+        int[] dp = Arrays.copyOf(p, n);
+        
+        for (int d = 1; d < n; d++){
+            for (int i = 0; i < n - d; i++){
+                int a = p[i];
+                int b = dp[i + 1];
+                int c = p[i + d];
+                int d_ = dp[i];
+                
+                dp[i] = Math.max(a-b, c-d_);
+            }
+        }
+        return dp[0] > 0;
     }
     
     
