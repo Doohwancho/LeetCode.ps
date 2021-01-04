@@ -20,15 +20,7 @@ public class MinimumFallingPathSum931 {
         if(b < 0 || b >= A[0].length || a >= A.length) return 0;
         if(mem[a][b] != constant) return mem[a][b];
         for(int i = b; i < A[0].length; i++){
-            int l = constant;
-            int r = constant;
-            if(i-1 >= 0){
-                l = dp(a+1,i-1);
-            }
-            if(i+1 < A[0].length){
-                r = dp(a+1, i+1);
-            }
-            mem[a][i] = Math.min(mem[a][i], A[a][i] + Math.min(dp(a+1,i), Math.min(l, r)));
+            mem[a][i] = Math.min(mem[a][i], A[a][i] + Math.min(dp(a+1,i), Math.min(dp(a+1,Math.max(i-1, 0)),dp(a+1, Math.min(i+1, A[0].length-1)))));
         }
         return mem[a][b];
     }
