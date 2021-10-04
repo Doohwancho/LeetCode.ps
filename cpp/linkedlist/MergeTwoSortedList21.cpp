@@ -389,6 +389,10 @@ public:
 
 //근데 비교할 때 매번 r->val, l->val 참조하는게 아니라, 미리 뽑아놓은 값이랑 비교하면 더 빨라질 것 같기는 헌데..
 
+//근데 어짜피 O(N)에서 벗어나지 못함.
+
+//O(N)이 상위 40%라는 얘기는 O(NlogN)정도는 되야 100%찍는다는 말 같은데
+
 
 class Solution {
 public:
@@ -438,6 +442,63 @@ public:
             }
         }
         l->next = r;
+        return head->next;
+    }
+};
+
+
+
+
+//solution 3
+
+//Runtime: 8 ms, faster than 74.73% of C++ online submissions for Merge Two Sorted Lists.
+//Memory Usage : 15.1 MB, less than 10.35 % of C++ online submissions for Merge Two Sorted Lists.
+
+//역시 뭐든 int[]쓰는게 제일 빠른듯
+//simple is the best라 이말이야
+
+//아 근데 cpp에서 int[] container = new int[201];가 안되길래 찾아봤더니
+//int container[201]; 쓰라고 해서
+//잉? new없이 써?
+//일단 썼는데 아니나 다를까 초기화 안해줘서 이상한 값이 들어있었음
+//cpp에서는 array초기화를 int container[201] = { 0 }; 이런식으로 한다네
+//java에서는 걍 new로 선언해주면 0으로 자동초기화 해줬는데
+
+//이래서 c계열 언어가 신경쓸게 많다는건가?
+
+//아 근데 아직도 100%가 아님
+
+//왠지 merge sort같이 기존 정렬 알고리즘에서 따와서 해야할거같은데
+
+//O(N)말고 O(N log N)중에 답이 있을거같은데 뭐지
+
+
+class Solution {
+public:
+    ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
+        int container[201] = { 0 };
+
+        while (l1 != nullptr) {
+            container[l1->val + 100]++;
+            l1 = l1->next;
+        }
+        while (l2 != nullptr) {
+            container[l2->val + 100]++;
+            l2 = l2->next;
+        }
+
+        ListNode* head = new ListNode(-101);
+        ListNode* start = head;
+
+        for (int i = 0; i < 201; i++) {
+            while (container[i] > 0) {
+                ListNode* tmp = new ListNode(i - 100);
+                start->next = tmp;
+                start = start->next;
+                container[i] -= 1;
+            }
+        }
+        start->next = nullptr;
         return head->next;
     }
 };
