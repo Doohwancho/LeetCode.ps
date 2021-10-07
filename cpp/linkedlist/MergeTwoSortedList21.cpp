@@ -457,6 +457,15 @@ public:
 //역시 뭐든 int[]쓰는게 제일 빠른듯
 //simple is the best라 이말이야
 
+//아 근데 아직도 100%가 아님
+
+//그리고 여러번 submit해보니 역시 O(N)
+
+//결국 O(N log N)을 해야 100%뜰듯.
+
+//왠지 느낌상 merge sort좀 비틀어서 적용하면 하면 될거같은데
+
+
 //아 근데 cpp에서 int[] container = new int[201];가 안되길래 찾아봤더니
 //int container[201]; 쓰라고 해서
 //잉? new없이 써?
@@ -466,11 +475,6 @@ public:
 
 //이래서 c계열 언어가 신경쓸게 많다는건가?
 
-//아 근데 아직도 100%가 아님
-
-//왠지 merge sort같이 기존 정렬 알고리즘에서 따와서 해야할거같은데
-
-//O(N)말고 O(N log N)중에 답이 있을거같은데 뭐지
 
 
 class Solution {
@@ -500,5 +504,288 @@ public:
         }
         start->next = nullptr;
         return head->next;
+    }
+};
+
+
+//solution 4
+
+//merge sort 도입
+
+//기냥 무지성으로다가 l1뒤에 l2이은 다음
+
+//merge sort해버림
+
+//Runtime: 0 ms, faster than 100.00% of C++ online submissions for Merge Two Sorted Lists.
+//Memory Usage : 14.9 MB, less than 53.64 % of C++ online submissions for Merge Two Sorted Lists.
+
+//이맛이지...
+
+
+
+//experiment 1)
+
+//splitInHalf(source, &a, &b); 말고
+//splitInHalf(source, a, b); 하면 안되나?
+
+//a도 포인터잖아?
+//reference &를 안쓰고 그냥 splitInHalf(source, a, b);를 넘기면,
+//포인터를 넘기는 거라도, 원본값 변경을 안하나봄
+//call by value처럼 파라미터로 받을 때 해당 포인터의 값을 복사해서 받나 봄
+
+//그래서 & reference를 써서 원본값 변경을 하나 봄
+
+//자바에서는 객체 넘기면 원본값 변경 가능했었는데 cpp에서는 객체 넘길때도 &로 명시해야 call by reference 되나보네
+
+
+
+//experiment 2)
+
+//그렇다면, *source = concatenate(a, b); 는 왜 &a로 안넘기지?
+
+//아
+
+//void mergeSort(ListNode** source) { 
+//    ListNode* head = *source; 
+//    ListNode* a;
+//    ListNode* b;
+//
+//    if (head == nullptr || head->next == nullptr) return;
+//
+//    splitInHalf(source, &a, &b);
+
+//splitInHalf()에서 a,b넘기기 전에 a,b는 그냥 초기화만 된 상태
+//ListNode* a;
+
+//그래서 포인터의 주솟값만 있고 가르키는 값이 없는 상태
+//그 상태에서 splitInHalf()에 기냥 a,b 넣어버리면, 값을 넣어버리는게 되는 것이므로 에러나는 것
+//근데 splitInHalf()에서 a,b에 값을 할당하고 난 이후엔,
+// *source = concatenate(a, b); 에서 a,b 넣어도 값이 있으니 에러 안나는 것
+
+
+//experiment 3)
+
+//splitInHalf()에서
+
+//ListNode* head = *source;
+//ListNode* slow = head;
+//ListNode* fast = slow->next;
+
+//얘는 에러걸리는데
+
+// ListNode* fast;
+// ListNode* slow;
+// slow = *source;
+// fast = slow->next;
+
+//얘는 에러 안걸림
+
+//?????
+
+
+//아
+//ListNode* head = *source;
+//ListNode* slow = head;
+
+//이렇게 하면, slow가 *source를 가르키는게 아니고, head를 가르켜서 그런가?
+
+
+//ListNode** head = source;
+//ListNode* slow = *head;
+//ListNode* fast = slow->next;
+
+//이렇게 하니까 되는걸 보면, 맞는 듯
+//head가 source의 값을 가르키게 하지 말고, source의 주솟값을 가르키게 하고,
+//*head를 해서 source의 값을 가르키게 하는 방식으로 해야하나 보다.
+
+
+//그리고 source가 있으니 따로 head 만들 필요도 없음
+
+
+
+//experiment 4)
+
+//선언 방식도
+
+// ListNode* fast;
+// ListNode* slow;
+// slow = *source;
+// fast = slow->next;
+
+//이렇게 초기화 한 다음 값을 할당하는게,
+
+//ListNode** head = source;
+//ListNode* slow = *head;
+//ListNode* fast = slow->next;
+
+//선언하면서 값을 할당하는 것 보다 더 깔끔하게 보임
+
+
+
+//experiment 5)
+
+//concatenate()의 재귀적 처리 방식이 어떤식으로 흘러가는거지?
+
+//1. mergeSort()로 입장
+//2. splitInHalf()로 반틈 쪼개서 왼쪽 a, 오른쪽 b 부여
+//3. 다시 mergeSort()에 반틈 쪼갠 왼쪽 a만 넣음
+//4. 원본을 a|b 이렇게 쪼갠 다음, a를 넣었잖아? 또 반으로 쪼갬. a|b | b 이렇게. 그리고 또 a를 mergeSort()에 넣어서 또 반으로 쪼갬.( a|b | b ) | b 이런식으로 a가 null이 될 때까지 무한반복
+//5. a가 더이상 쪼갤 수 없는 null이 되면, 이전단계로 복귀함. a | null 이면 a를 return하고 그 윗단계를 감.  a | b이면, 둘 중 작은거를 앞에넣어 붙이고 윗단계로 return 시킴. 
+//6. 이렇게 위로 보내기를 하다가, 만약에 a|b가 (2,4),(1,3) 이라면? 맨 처음 a,b에 맨 앞자리만 보고 비교함. 더 작은 1을 붙이고, concatenate()를 재귀함. 1-> ? 인 상태에서 (2,4),(3)에서 앞자리만 비교해서 더 작은걸 붙임.
+//   1->2 (4),(3)에서 또 concatenate()를 재귀함 이런식으로 정렬하는 것
+
+
+
+
+//experiment 6)
+
+//그래서 시간복잡도는?
+
+//merge sort는 O(n log n)이라는데, 왜지?
+
+//log의 밑이 2라는 가정하에, 2^? = n이 되기 위해서, log(N)번 쪼개야함. 이게 depth
+
+//그리고 쪼갠 애를 서로 비교해서 붙이는걸 n번 참조한다고 퉁치는 듯?
+
+class Solution {
+
+public: 
+    void splitInHalf(ListNode** source, ListNode** a, ListNode** b){
+
+        ListNode* fast;
+        ListNode* slow;
+        slow = *source;
+        fast = slow->next;
+            
+
+        while(fast != nullptr){
+            fast = fast->next;
+            if(fast != nullptr){
+                fast = fast->next;
+                slow = slow->next;
+            }
+        }
+        
+        *a = *source;
+        *b = slow->next;
+        slow->next = nullptr;
+    }
+    
+    ListNode* concatenate(ListNode* a, ListNode* b){
+        if(a == nullptr) return b; 
+        if(b == nullptr) return a;
+        
+        ListNode* tmp = nullptr;
+        
+        if(a->val < b->val){
+            tmp = a;
+            tmp->next = concatenate(a->next, b);
+        } else {
+            tmp = b;
+            tmp->next = concatenate(a, b->next);
+        }
+        return tmp;
+    }
+    
+    void mergeSort(ListNode** source){ 
+        ListNode* head = *source; 
+        ListNode* a;
+        ListNode* b;
+        
+        if(head == nullptr || head->next == nullptr) return;
+        
+        splitInHalf(source, &a, &b); 
+        
+        mergeSort(&a); 
+        mergeSort(&b);
+        
+        *source = concatenate(a, b); 
+    }
+    
+    ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
+        if(l1 == nullptr) return l2;
+        if(l2 == nullptr) return l1;
+        ListNode* head = l1;
+        
+        while(l1->next != nullptr){
+            l1 = l1->next;
+        }
+        l1->next = l2;
+        
+        mergeSort(&head);
+        
+        return head;
+    }
+};
+
+class Solution {
+
+public:
+    void splitInHalf(ListNode** source, ListNode** a, ListNode** b) {
+
+        ListNode* fast;
+        ListNode* slow;
+        slow = *source;
+        fast = slow->next;
+
+
+        while (fast != nullptr) {
+            fast = fast->next;
+            if (fast != nullptr) {
+                fast = fast->next;
+                slow = slow->next;
+            }
+        }
+
+        *a = *source;
+        *b = slow->next;
+        slow->next = nullptr;
+    }
+
+    ListNode* concatenate(ListNode* a, ListNode* b) {
+        if (a == nullptr) return b;
+        if (b == nullptr) return a;
+
+        ListNode* tmp = nullptr;
+
+        if (a->val < b->val) {
+            tmp = a;
+            tmp->next = concatenate(a->next, b);
+        }
+        else {
+            tmp = b;
+            tmp->next = concatenate(a, b->next);
+        }
+        return tmp;
+    }
+
+    void mergeSort(ListNode** source) {
+        ListNode* head = *source;
+        ListNode* a;
+        ListNode* b;
+
+        if (head == nullptr || head->next == nullptr) return;
+
+        splitInHalf(source, &a, &b);
+
+        mergeSort(&a);
+        mergeSort(&b);
+
+        *source = concatenate(a, b);
+    }
+
+    ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
+        if (l1 == nullptr) return l2;
+        if (l2 == nullptr) return l1;
+        ListNode* head = l1;
+
+        while (l1->next != nullptr) {
+            l1 = l1->next;
+        }
+        l1->next = l2;
+
+        mergeSort(&head);
+
+        return head;
     }
 };
