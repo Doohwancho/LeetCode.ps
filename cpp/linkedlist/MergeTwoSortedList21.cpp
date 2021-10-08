@@ -133,11 +133,11 @@ public:
 
 //아 근데 성능이 좀 구리네?
 
-//일단 l2맨 처음 노드의 값을 빼. 그리고 l1을 돌면서l2에서 뺀 애보다 클때까지 돌다가, 큰애가 나왔다 싶으면, l2에서 이번엔 l1큰애보다 큰애가 나올때까지 돌아
-//그리고 l2애를 한번에 l1 현재노드 바로 직전에 샥 붙이는거지
+//l1, l2 맨 앞에 애들부터 차례대로 서로 비교해가며, 더 작은애를 넣는 방법
 
-//아 근데 이 방법은 원래 방법보다 매 loop마다 l1,l2 비교 안해서 좋기는 한데, 파라미터의 원래값을 훼손시키잖아?
+//원본값을 회손 안한다는 장점 존재
 
+//O(N)
 
 
 
@@ -174,7 +174,9 @@ public:
 
 //trial04
 
-//위에 적은거 대로 만들어 봤긴 했는데
+//구슬꿰듯, l1돌다가 l2에 더 적은거 있으면 l2돌다가 l1에 더 적은거 있으면 다시 l1돌다가
+
+//이런식으로 동작하는애 만드는 중
 
 //Accepted
 //Runtime: 0 ms
@@ -376,13 +378,12 @@ public:
 
 //1ms줄음 ㅋㅋㅋ ㅏ...
 
-//위엣것도 O(N)
-//이것도 O(N)이라 그런 듯
-
 //solution1은 l1,l2 모든 노드 돌면서 서로 비교해서 더 작은놈은 head에 붙이고
 //solution2도 l1,l2 모든 노드 돌면서 서로 비교하긴 하는데, 새로운 head에 붙이는게 아니고 원래 있던 l1,l2 사이에 붙이는 식으로 함
 //큰 차이는 없음
 
+//위엣것도 O(N)
+//이것도 O(N)이라 별 차이 없는 듯
 //아예 접근법이 달라야 하나봄
 
 //잘 보면 solution2는 20ms 극단값이 있음. l1갔다가 l2바꿔끼웠다가 다시 l1바꿔끼웠다가 다시 l2바꿔끼웠다가 무한반복 하면 저리되나봄
@@ -459,7 +460,7 @@ public:
 
 //아 근데 아직도 100%가 아님
 
-//그리고 여러번 submit해보니 역시 O(N)
+//O(N)이라 그런지 여러번 submit해도 성능상 큰 차이 없음
 
 //결국 O(N log N)을 해야 100%뜰듯.
 
@@ -474,6 +475,9 @@ public:
 //java에서는 걍 new로 선언해주면 0으로 자동초기화 해줬는데
 
 //이래서 c계열 언어가 신경쓸게 많다는건가?
+
+//cpp에서는 new키워드 잘 안쓴다고 함. 나중에 메모리 수동으로 해제해줘야 해서리...
+//굳이 쓸거면 smart pointer라는걸 쓴다고 함
 
 
 
@@ -535,7 +539,10 @@ public:
 
 //그래서 & reference를 써서 원본값 변경을 하나 봄
 
-//자바에서는 객체 넘기면 원본값 변경 가능했었는데 cpp에서는 객체 넘길때도 &로 명시해야 call by reference 되나보네
+//자바에서는 객체 넘기면 원본값 변경 가능했었는데 cpp에서는 객체 넘길때도 &로 명시해야 call by reference 되나보네?
+
+
+//experiment2에 나오지만, 알고보니 splitInHalf()하기 전에 a,b를 걍 초기화만 해놓은 상태였기 때문에, 값을 못넘기고 포인터의 주솟값을 넘길 수 밖에 없어서 &a인 reference로 넘긴 것.
 
 
 
@@ -718,74 +725,46 @@ public:
     }
 };
 
+
+//solution5 by StefanPochmann
+
+
+
+//The first line ensures that a is at least as good a list head as b, by swapping them if that's not already the case. 
+//The second line merges the remaining lists behind a.
+
+
+
+//1)
+ 
+//일단 cpp은 swap()이 기본적으로 구현됬다는점이 놀라움.
+
+//이래서 알고리즘 각잡고 할거면 cpp로 하라는 이유인가?
+
+//2) 
+
+//첫번째 if문에서, 왜 !l1해줘야 하지?
+
+//애초에 첫번째 if문의 존재 이유가, l1이랑 l2중에서 가장 첫번째 element가 더 작은개를 l1으로 두기 위함 아닌가?
+
+//-> !l1하고 or을 쓰기 때문에, 만약에 l1이 nullptr라면, l2를 l1에 넣어줌
+ 
+//그리고 !l1 || 을 해 둬야, 조건문 끝부분에 l1->val에서 메모리 참조 에러 안뜸
+
+//3)
+
+//if(l1 && l2 && (l2->val < l1->val))이 아닌건, l1,l2중 l1이 nullptr이고 l2가 값이 있을 때, swap()해주지 않는구나
+
+//4)
+
+//!l1 && ()이 아닌것도 동일한 이유 때문
+
+
 class Solution {
-
 public:
-    void splitInHalf(ListNode** source, ListNode** a, ListNode** b) {
-
-        ListNode* fast;
-        ListNode* slow;
-        slow = *source;
-        fast = slow->next;
-
-
-        while (fast != nullptr) {
-            fast = fast->next;
-            if (fast != nullptr) {
-                fast = fast->next;
-                slow = slow->next;
-            }
-        }
-
-        *a = *source;
-        *b = slow->next;
-        slow->next = nullptr;
-    }
-
-    ListNode* concatenate(ListNode* a, ListNode* b) {
-        if (a == nullptr) return b;
-        if (b == nullptr) return a;
-
-        ListNode* tmp = nullptr;
-
-        if (a->val < b->val) {
-            tmp = a;
-            tmp->next = concatenate(a->next, b);
-        }
-        else {
-            tmp = b;
-            tmp->next = concatenate(a, b->next);
-        }
-        return tmp;
-    }
-
-    void mergeSort(ListNode** source) {
-        ListNode* head = *source;
-        ListNode* a;
-        ListNode* b;
-
-        if (head == nullptr || head->next == nullptr) return;
-
-        splitInHalf(source, &a, &b);
-
-        mergeSort(&a);
-        mergeSort(&b);
-
-        *source = concatenate(a, b);
-    }
-
     ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
-        if (l1 == nullptr) return l2;
-        if (l2 == nullptr) return l1;
-        ListNode* head = l1;
-
-        while (l1->next != nullptr) {
-            l1 = l1->next;
-        }
-        l1->next = l2;
-
-        mergeSort(&head);
-
-        return head;
+        if (!l1 || (l2 && l2->val < l1->val)) swap(l1, l2);
+        if (l1) l1->next = mergeTwoLists(l1->next, l2);
+        return l1;
     }
 };
