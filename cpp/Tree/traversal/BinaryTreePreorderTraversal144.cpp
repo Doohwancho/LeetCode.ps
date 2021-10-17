@@ -115,3 +115,61 @@ public:
         return v;
     }
 };
+
+
+
+//아 binary search tree가 아니고 binary tree네?
+
+//그러면 위에 구현한게 정석이지 않나? 더 줄일게 있나?
+
+//insert할 때 특정한 규칙이 있는게 아니잖아? 그러면, 그 규칙을 이용해서 최적화 할게 없다는 말인데
+
+//vector가 아니라 다른걸써야되나?
+
+
+//Solution2
+
+//by pavel-shlyk
+
+//Runtime: 0 ms, faster than 100.00 % of C++ online submissions for Binary Tree Preorder Traversal.
+//Memory Usage : 8.4 MB, less than 44.99 % of C++ online submissions for Binary Tree Preorder Traversal.
+
+//Note that in this solution only right children are stored to stack.
+
+//public List<Integer> preorderTraversal(TreeNode node) {
+//    List<Integer> list = new LinkedList<Integer>();
+//    Stack<TreeNode> rights = new Stack<TreeNode>();
+//    while (node != null) {
+
+//이까지 보고 품
+
+//pre order traversal이 stack으로 도는 방법도 있구나
+
+//cpp에서는 stack.pop()하면 object반환 안하고 제거만 한 후에 void반환하네
+
+
+
+class Solution {
+public:
+    vector<int> preorderTraversal(TreeNode* root) {
+        vector<int> v;
+        stack<TreeNode*> st;
+
+        while (root != nullptr) {
+
+            v.push_back(root->val);
+
+            if (root->right != nullptr) {
+                st.push(root->right);
+            }
+
+            root = root->left;
+
+            if (root == nullptr && !st.empty()) {
+                root = st.top();
+                st.pop();
+            }
+        }
+        return v;
+    }
+};
