@@ -114,6 +114,10 @@ public:
 
 //아 a->b는 문제 없는데, b->a할 때 문제가 생기네?
 
+//a,b를 둘다 queue써볼까? 아 그러면 a.push()할 때 또 문제가 생기네
+
+//답의 윗부분 보니까 stack 두개로 해결 가능하다고 함. 그리고 대충 보니까 졸라 단순해 보였음
+
 class MinStack {
 
     stack<int> st;
@@ -221,5 +225,100 @@ public:
     }
 };
 
+
+//solution1 by zjchenRice
+
+
+//Runtime: 20 ms, faster than 87.17 % of C++ online submissions for Min Stack.
+//Memory Usage : 16.4 MB, less than 32.86 % of C++ online submissions for Min Stack.
+
+//처음에 보고 잉? 했던게, 난 stack a에 있는 모든 요소들을 오름차순이건 내림차순이건 정렬해야 한다고 생각했는데,
+
+//얘는 첫빠따보다 큰 애들은 버려버림. 왜냐면 만약 push(1), push(2), push(3) 해서 stack b에 1만 들어갔다고 해도, 최악의 경우 stack a에 pop(), pop() 해봤자, getMin()의 1은 남아있잖아
+
+//모든 요소를 정렬해야 한다는 생각이 오판이었음.
+
+
+class MinStack {
+
+    stack<int> a;
+    stack<int> b;
+
+
+public:
+    MinStack() {
+
+    }
+
+    void push(int val) {
+        a.push(val);
+        if (b.size() == 0 || b.top() >= val) b.push(val);
+    }
+
+    void pop() {
+        if (a.top() == b.top()) b.pop();
+        a.pop();
+    }
+
+    int top() {
+        return a.top();
+    }
+
+    int getMin() {
+        return b.top();
+    }
+};
+
+
+
+//solution2 by leftpeter2
+
+//아
+
+//5,5,5,4,3,2,1 이런 순으로 push 했다고 하면
+
+//getMin도 5,5,5,4,3,2,1 이겠네. 그러면 맨 뒤에 1부터 뺀다고 해도 상관 없네
+
+//만약 5,-1,5,4,3,2,1 이렇게 넣는다고 하면,
+
+//min은 5,-1,-1,-1,-1,-1,-1 이렇게 들어가서 상관 없겠네
+
+//stack에 min정보가 같이 담긴 오브젝트를 넣어주는 것
+
+//O(1)
+
+//Runtime: 16 ms, faster than 97.53 % of C++ online submissions for Min Stack.
+//Memory Usage : 16.6 MB, less than 13.16 % of C++ online submissions for Min Stack.
+
+
+class MinStack {
+
+    stack<pair<int, int>>st;
+
+public:
+    void push(int val) {
+        if (st.size() == 0) {
+            st.push({ val,val });
+        }
+        else {
+            int minimum = st.top().second;
+            minimum = min(minimum, val);
+            st.push({ val,minimum });
+        }
+    }
+
+    void pop() {
+        if (st.size() == 0) return;
+        st.pop();
+    }
+
+    int top() {
+        return st.top().first;
+    }
+
+    int getMin() {
+        return st.top().second;
+    }
+};
 
 
