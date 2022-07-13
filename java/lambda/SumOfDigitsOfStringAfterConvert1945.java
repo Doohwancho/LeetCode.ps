@@ -35,8 +35,6 @@ public class SumOfDigitsOfStringAfterConvert1945 {
         return str
             .chars()
             .mapToObj(ch -> (char)ch-96)
-            .collect(Collectors.toList())
-            .stream()
             .map(i -> i == 19 ? 1 : (i/10+i%10))
             .reduce(0, Integer::sum);
     }
