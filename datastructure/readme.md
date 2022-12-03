@@ -1,0 +1,39 @@
+---\
+Goal
+
+
+Modularize datastructure
+
+
+
+
+---\
+Approach
+
+
+1. [black-box method](https://www.youtube.com/watch?v=RDzsrmMl48I&ab_channel=ColinGalen) to get used to it
+2. [build from scratch](https://www.youtube.com/watch?v=fQeqsn7JJWA&ab_channel=vexe) to understand it
+3. solve leetcode to internalize it
+
+
+
+---\
+Concepts
+
+
+a. sort\
+b. linked list\
+c. hash table\
+d. bitmask\
+e. binary heap\
+f. binary search tree\
+g. graph\
+
+
+
+===\
+Todo
+
+
+f-1. binary search tree :white_check_mark:
+
