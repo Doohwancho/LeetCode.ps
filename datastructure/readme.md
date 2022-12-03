@@ -35,5 +35,5 @@ g. graph\
 Todo
 
 
-f-1. binary search tree :white_check_mark:
-
+f-1. binary search tree :white_check_mark:\
+f-2. binary search tree - AVL :white_check_mark:
