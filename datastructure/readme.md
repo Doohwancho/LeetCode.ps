@@ -27,7 +27,7 @@ c. hash table\
 d. bitmask\
 e. binary heap\
 f. binary search tree\
-g. graph\
+g. graph
 
 
 
@@ -36,4 +36,5 @@ Todo
 
 
 f-1. binary search tree :white_check_mark:\
-f-2. binary search tree - AVL :white_check_mark:
+f-2. AVL tree :white_check_mark:\
+f-3. Red Black Tree :white_check_mark:
