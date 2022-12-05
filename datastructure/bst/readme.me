@@ -1,5 +1,5 @@
----
-what is binary search tree?
+============================================================
+A. what is binary search tree?
 
 1. has 2 children: left and right
 2. left child is less than parent
@@ -37,13 +37,16 @@ you can simple attach a new node to the end of the linked list, but you have to 
 
 
 
----
-what is AVL tree?
+============================================================
+B. what is AVL tree?
 
 1. has 2 children: left and right
 2. left child is less than parent
 3. right child is greater than parent
+--- binary search tree
+
 4. height of left and right child is not more than 1
+
 
 basically, 1~3 is same as binary search tree, but 4 is different
 
@@ -74,3 +77,42 @@ https://visualgo.net/en/bst?mode=AVL
 try to insert a node that breaks the rule of AVL tree: height of left and right child is not more than 1
 
 if you do, you will see that it rotates the tree to balance it
+
+
+
+============================================================
+C. what is red-black tree?
+
+
+1. has 2 children: left and right
+2. left child is less than parent
+3. right child is greater than parent
+--- binary search tree
+
+4. height of left and right child is not more than 1
+--- AVL tree
+
+5. every node is either red or black
+6. root is black
+7. every leaves nodes(NIL) is black (NIL is not node, it is just a place holder)
+8. if a node is red, both of its children are black
+9. all paths from the root node to its NIL descendants contain the same number of black nodes
+--- red black tree
+
+
+---
+red black tree의 다른 특징
+
+1. node requires one bit of extra storage to hold the color information
+2. root to fathest NIL is at most twice as long as root to nearest NIL
+3. search is no different, but insert | remove requires rotations to maintain the properties. (search, insert, remove are all O(logN))
+
+
+---
+Q. if AVL tree and red black tree are both balanced, why do we need red black tree?
+
+
+1. AVL tree requires more rotations to maintain balance than red black tree
+2. AVL tree are more rigidly blanced than red black tree. therefore, more rotation -> more overhead
+
+
