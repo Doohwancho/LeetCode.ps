@@ -25,16 +25,19 @@ a. sort\
 b. linked list\
 c. hash table\
 d. bitmask\
-e. binary heap\
-f. binary search tree\
+e.
+f. binary tree\
 g. graph
 
 
 
-===\
+---\
 Todo
 
 
 f-1. binary search tree :white_check_mark:\
 f-2. AVL tree :white_check_mark:\
-f-3. Red Black Tree :white_check_mark:
+f-3. Red Black Tree :white_check_mark:\
+f-4. heap :white_check_mark:\
+f-4-1. priority queue using heap :white_check_mark:\
+f-4-2. memory management using heap -- yet
