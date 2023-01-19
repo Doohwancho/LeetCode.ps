@@ -23,17 +23,26 @@ Concepts
 
 a. sort\
 b. linked list\
-c. hash table\
+c. hash\
 d. bitmask\
-e.
+e. list\
 f. binary tree\
-g. graph
+x. stack\
+x. queue\
+x. graph
 
 
 
 ---\
 Todo
 
+
+c-1. hash table :white_check_mark:\
+x-2. hash map
+
+x-1. vector\
+x-2. array\
+x-3. linked list
 
 f-1. binary search tree :white_check_mark:\
 f-2. AVL tree :white_check_mark:\
