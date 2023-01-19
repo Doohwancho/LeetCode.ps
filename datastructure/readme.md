@@ -22,12 +22,13 @@ Concepts
 
 
 a. list\
-b. set\
+b. map\
 c. hash\
 d. bitmask\
 e. stack\
 f. binary tree\
 x. queue\
+x. set\
 x. graph
 
 
@@ -40,8 +41,7 @@ x-1. vector\
 x-2. array\
 x-3. linked list
 
-x-1. hash set
-x-2. tree set
+b-1. map :white_check_mark:
 
 c-1. hash table :white_check_mark:\
 c-2. hash map :white_check_mark:
@@ -54,3 +54,6 @@ f-4-1. priority queue using heap :white_check_mark:\
 f-4-2. memory management using heap -- yet
 
 x-1. priority queue
+
+x-1. hash set\
+x-2. tree set
