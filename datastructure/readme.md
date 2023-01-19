@@ -21,13 +21,12 @@ Approach
 Concepts
 
 
-a. sort\
-b. linked list\
+a. list\
+b. set\
 c. hash\
 d. bitmask\
-e. list\
+e. stack\
 f. binary tree\
-x. stack\
 x. queue\
 x. graph
 
@@ -37,12 +36,15 @@ x. graph
 Todo
 
 
-c-1. hash table :white_check_mark:\
-x-2. hash map
-
 x-1. vector\
 x-2. array\
 x-3. linked list
+
+x-1. hash set
+x-2. tree set
+
+c-1. hash table :white_check_mark:\
+c-2. hash map :white_check_mark:
 
 f-1. binary search tree :white_check_mark:\
 f-2. AVL tree :white_check_mark:\
@@ -50,3 +52,5 @@ f-3. Red Black Tree :white_check_mark:\
 f-4. heap :white_check_mark:\
 f-4-1. priority queue using heap :white_check_mark:\
 f-4-2. memory management using heap -- yet
+
+x-1. priority queue
