@@ -1,4 +1,5 @@
 
+/*
 // pre-requisites: alphabet string to number
 
 let a: string = 'a';
@@ -22,7 +23,7 @@ console.log(y); //NaN
 let z = b.charCodeAt(0) - 97;
 console.log(z);
 //오 된다
-
+*/
 
 
 
@@ -35,7 +36,7 @@ console.log(z);
 function numberOfLines(widths: number[], s: string): number[] {
     let total: number = 0;
     let x: number = s.length > 0 ? 1 : 0;
-    
+
     for(let str of s){
         let adder: number = widths[str.charCodeAt(0) - 97];
         if(total + adder > 100){
@@ -55,13 +56,13 @@ function numberOfLines(widths: number[], s: string): number[] {
 //Runtime: 110 ms, faster than 41.67% of TypeScript online submissions for Number of Lines To Write String.
 //Memory Usage: 45.1 MB, less than 16.67% of TypeScript online submissions for Number of Lines To Write String.
 
-//성능 최적화를 떠나서 
+//성능 최적화를 떠나서
 //solution1과 같은 로직이지만, 읽기 훨씬 더 깔끔해서 좋다.
 
 function numberOfLines(widths: number[], s: string): number[] {
     let x: number = 1;
     let y: number = 0;
-    
+
     for(let char of s){
         let width: number = widths[char.charCodeAt(0) - 97];
         x = y + width > 100 ? x+1 : x;
@@ -69,3 +70,29 @@ function numberOfLines(widths: number[], s: string): number[] {
     }
     return [x, y];
 };
+
+describe("", () => {
+  it("should pass", () => {
+    const cases = [
+      {
+		  input: {
+		  	widths: [10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10],
+			s: "abcdefghijklmnopqrstuvwxyz"
+	  	   },
+		   output: [3,60]
+	  },
+	  {
+		  input: {
+		  	widths: [4,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10],
+			s: "bbbcccdddaaa"
+	  	   },
+		   output: [2,4]
+	  },
+    ];
+
+    cases.forEach(({ input, output }) => {
+      expect(numberOfLines(input.widths, input.s)).toEqual(output);
+    });
+  });
+});
+

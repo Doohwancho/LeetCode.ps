@@ -1,0 +1,23 @@
+---
+Goal
+
+
+1. problem solving skills
+2. modularize datastructure & algorithm for coding interview
+3. get familiar with typescript & jest
+
+
+
+---
+How
+
+
+LOOP
+	1. think first
+	2. write followings
+		- a. how I would approach this problem certain data structure & algorithm
+		- b. Time Complexity, Space Complexity
+	3. run test
+	4. write what's unexpected
+#LOOP
+
