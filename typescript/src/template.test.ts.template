@@ -1,0 +1,21 @@
+//Question
+
+
+//difficulty:
+//data structure:
+//algorithm:
+//time complexity:
+//space complexity:
+
+describe("", () => {
+  it("should pass", () => {
+    const cases = [
+      { input: , output:  },
+      { input: , output:  },
+    ];
+
+    cases.forEach(({ input, output }) => {
+      expect(function(input)).toEqual(output);
+    });
+  });
+});
