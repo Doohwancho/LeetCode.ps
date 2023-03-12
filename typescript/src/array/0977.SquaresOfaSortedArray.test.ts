@@ -33,10 +33,15 @@ function sortedSquares1(nums: number[]): number[] {
 
 // two pointers
 
+// 아 더러워
+
 //difficulty: easy
 //data structure: array
 //algorithm: two-pointers
 //time complexity: O(n)
+
+//Runtime 515 ms
+//Memory 48.7 MB
 
 function sortedSquares2(nums: number[]): number[] {
 	for(let i = 0, j = nums.length-1; j >= 0; j--){
@@ -63,6 +68,33 @@ function sortedSquares2(nums: number[]): number[] {
 };
 
 
+//solution3 by wangzi6147
+
+//two pointers
+
+//새 array를 역순으로 채워나가면서, 원본 two pointer 중, 더 큰 값을 채우는 방식.
+
+//time complexity: O(n)
+//Runtime 96 ms
+//Memory 50 MB
+
+
+function sortedSquares3(A: number[]): number[] {
+	let n:number= A.length;
+	let result:number[] = new Array(n);
+	let i:number = 0, j:number = n - 1;
+	for (let p = n - 1; p >= 0; p--) {
+		if (Math.abs(A[i]) > Math.abs(A[j])) {
+			result[p] = A[i] * A[i];
+			i++;
+		} else {
+			result[p] = A[j] * A[j];
+			j--;
+		}
+	}
+    return result;
+}
+
 describe("", () => {
   it("should pass", () => {
     const cases = [
@@ -73,7 +105,7 @@ describe("", () => {
     ];
 
     cases.forEach(({ input, output }) => {
-      expect(sortedSquares2(input.nums)).toEqual(output);
+      expect(sortedSquares3(input.nums)).toEqual(output);
     });
   });
 });
