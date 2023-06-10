@@ -1,0 +1,44 @@
+    //solution1 - map
+    //시간복잡도 - O(N)
+    //공간복잡도 - O(N)
+    fun containsDuplicate(nums: IntArray): Boolean {
+        val map = HashMap<Int, Int>()
+        for (num in nums) {
+            if (map.containsKey(num)) {
+                return true
+            } else {
+                map[num] = 1
+            }
+        }
+        return false
+    }
+
+
+	//solution2 - set
+    //시간복잡도 - O(N)
+    //공간복잡도 - O(N)
+    fun containsDuplicate(nums: IntArray): Boolean {
+        return nums.size != nums.toSet().size
+    }
+
+
+	//solution3 - sort and compare adjacent
+    //시간복잡도 - O(NlogN)
+    //공간복잡도 - O(N)
+    fun containsDuplicate(nums: IntArray): Boolean {
+        nums.sort()
+        for (i in 0 until nums.size - 1) {
+            if (nums[i] == nums[i + 1]) {
+                return true
+            }
+        }
+        return false
+    }
+
+
+	//solution4 - array.distinct()
+    //time complexity - O(N)
+    //space complexity - O(N)
+    fun containsDuplicate(nums: IntArray): Boolean {
+        return nums.distinct().size != nums.size
+    }
