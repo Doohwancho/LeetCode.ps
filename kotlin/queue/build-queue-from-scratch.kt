@@ -113,6 +113,43 @@ Q. 단점3 문제 어떻게 해결하지?
 
 circular buffer(ring buffer) 방식으로 해결 가능.
 
+```kotlin
+class CircularQueue(private val size: Int) {
+    private val array = IntArray(size)
+    private var front = 0
+    private var rear = -1
+    private var count = 0
+
+    fun enqueue(value: Int) {
+        if (isFull()) {
+            throw IllegalStateException("Queue is full")
+        }
+        rear = (rear + 1) % size
+        array[rear] = value
+        count++
+    }
+
+    fun dequeue(): Int {
+        if (isEmpty()) {
+            throw IllegalStateException("Queue is empty")
+        }
+        val value = array[front]
+        front = (front + 1) % size
+        count--
+        return value
+    }
+
+    fun isFull() = count == size
+
+    fun isEmpty() = count == 0
+}
+
+```
+
+- front가 head, rear이 tail
+- front나 rear이나 queue.size를 초과하면, 다시 0으로 돌아오게끔 강제한다.
+
+
 
 ---
 방법C: using linkedList
