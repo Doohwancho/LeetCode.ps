@@ -27,7 +27,8 @@ c. hash\
 d. bitmask\
 e. stack\
 f. binary tree\
-x. queue\
+g. queue\
+h. stack\
 x. set\
 x. graph
 
@@ -44,7 +45,8 @@ x-3. linked list
 b-1. map :white_check_mark:
 
 c-1. hash table :white_check_mark:\
-c-2. hash map :white_check_mark:
+c-2. hash map :white_check_mark:\
+c-3. consistent-hashing :white_check_mark:
 
 f-1. binary search tree :white_check_mark:\
 f-2. AVL tree :white_check_mark:\
@@ -53,7 +55,10 @@ f-4. heap :white_check_mark:\
 f-4-1. priority queue using heap :white_check_mark:\
 f-4-2. memory management using heap -- yet
 
-x-1. priority queue
+g-1. build queue using array && linkedlist && stack :white_check_mark:\
+g-2. priority queue
+
+h-1. build stack using array && linkedlist && queue :white_check_mark:
 
 x-1. hash set\
 x-2. tree set
